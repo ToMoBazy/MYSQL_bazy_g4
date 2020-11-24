@@ -1,0 +1,27 @@
+Zadanie 3.
+a)UPDATE postac set id_statku=1  where nazwa like '%a%';
+
+b)UPDATE statek SET max_ladownosc=max_ladownosc*0.7 WHERE dota_wodowania between '1501-01-01' and '1800-12-31';
+c)alter table postac add check(wiek <= 1000);
+albo alter table postac add [constraint nazwa_check] CHECK (wiek <=1000);
+
+Zadanie 4
+A)insert into postac(id_postaci, nazwa, rodzaj, data_ur, wiek, funkcja, id_statku) VALUES(7, 'Loko', 'waz', '1732-11-11', 65, NULL, NULL);
+b)create table marynarz SELECT *FROM postac;
+ create table marynarz1 LIKE postac;
+
+
+
+zadanie 5
+a)UPDATE postac SET id_statku=NULL;
+b) DELETE FROM postac WHERE nazwa='wiking1';
+c) DELETE FROM statek nazwa_statku;
+DELETE FROM statek rodzaj;
+DELETE FROM statek dota_wodowania;
+DELETE FROM statek max_ladownosc;
+d)ALTER TABLE postac DROP foreign KEY postac_ibfk_1;
+drop table statek;
+e)create table zwierz( id int  primary key  auto_increment, nazwa varchar(50), wiek int);
+f)insert into zwierz select id_postaci, nazwa, wiek from postac where nazwa='waz' and nazwa='ptak';
+
+
