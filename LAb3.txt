@@ -1,0 +1,39 @@
+Zadanie 1.
+1.CREATE TABLE postac1(id_postaci int PRIMARY KEY AUTO_INCREMENT, nazwa VARCHAR(40), rodzaj ENUM('wiking','ptak','kobieta'), data_ur DATE, wiek INT(3) UNSIGNED);
+2.INSERT INTO postac1 VALUES(default, 'Bjorn', 'wiking', '1765-11-11', 35);
+3.UPDATE postac1 SET wiek=88 WHERE nazwa='Tesciowa';
+
+Zadanie 2.
+1.CREATE TABLE walizka1(id_walizki INT PRIMARY KEY AUTO_INCREMENT, pojemnosc int unsigned, kolor ENUM('rozowy','czerwony','teczowy','zolty'), id_wlasciciela int, FOREIGN KEY(id_wlasciciela) REFERENCES postac1(id_postaci) ON DELETE CASCADE);
+2.ALTER TABLE walizka1 ALTER kolor SET DEFAULT 'rozowy';
+3.INSERT INTO walizka1 VALUES(DEFAULT, 50, DEFAULT, 1);
+  INSERT INTO walizka1 VALUES(DEFAULT, 50, DEFAULT, 3);
+
+
+
+Zadanie 3.
+1.CREATE TABLE izba1(adres_budynku varchar(50), nazwa_budynku varchar(50), metraz int unsigned, wlasciciel int, PRIMARY KEY(adres_budynku,nazwa_budynku), FOREIGN KEY(wlasciciel) REFERENCES postac1(id_postaci) ON DELETE SET NULL);
+2.ALTER TABLE izba1 ADD COLUMN kolor ENUM('czarny', 'bialy','rozowy')  DEFAULT 'czarny' AFTER metraz;
+3.INSERT INTO izba1(adres_budynku, nazwa_budynku, metraz, wlasciciel)  VALUES('akacjowa1', 'spizarnia', 50, 1);
+
+
+
+Zadanie 4.
+1.CREATE TABLE przetwory1( id_przetworu int PRIMARY KEY, rok_produkcji DATE DEFAULT '1654-11-11', id_wykonawcy int, FOREIGN KEY(id_wykonawcy) REFERENCES postac1(id_postaci), zawartosc varchar(50), dodatek varchar(50) DEFAULT 'chilli', id_konsumenta int, FOREIGN KEY(id_konsumenta) REFERENCES postac1(id_postaci));
+2.INSERT INTO przetwory1 VALUES(1,DEFAULT,1,'bigos',DEFAULT,1);
+
+
+
+Zadanie 5.
+1.INSERT INTO postac1 VALUES(default,'wiking1','wiking','1654-11-11', 60);
+2.CREATE TABLE statek(nazwa_statku varchar(50) PRIMARY KEY, rodzaj_statku enum('duzy','sredni','maly'), data_wodowania DATE, max_ladownosc int unsigned);
+3.INSERT INTO statek VALUES('fajny','duzy','1677-11-11',50);
+4.ALTER TABLE postac1 ADD COLUMN funkcja varchar(50);
+5.UPDATE postac1 SET funkcja='kapitan' where nazwa='Bjorn';
+6.ALTER TABLE postac1 ADD COLUMN statek varchar(50);
+  ALTER TABLE postac1 ADD FOREIGN KEY(statek) REFERENCES statek(nazwa_statku);
+7.UPDATE postac1 SET statek='fajny' where rodzaj='wiking';
+  UPDATE postac1 SET statek='slaby' where nazwa='Drozd';
+8.DELETE FROM izba1 WHERE nazwa_budynku='spizarnia';
+9.DROP TABLE izba1;
+	

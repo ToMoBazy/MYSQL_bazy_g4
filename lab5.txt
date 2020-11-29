@@ -1,0 +1,32 @@
+Zadanie1.
+1.CREATE TABLE kreatura1 LIKE wikingowie.kreatura;
+CREATE TABLE zasob1 LIKE wikingowie.zasob;
+CREATE TABLE ekwipunek1 LIKE wikingowie.ekwipunek;
+INSERT INTO ekwipunek1 SELECT *FROM wikingowie.ekwipunek;
+INSERT INTO zasob1 SELECT *FROM wikingowie.zasob;
+INSERT INTO kreatura1 SELECT *FROM wikingowie.kreatura;
+2.SELECT * FROM zasob1;
+3.SELECT * FROM zasob1 where rodzaj='jedzenie';
+4.SELECT idZasobu, ilosc FROM  ekwipunek1 WHERE idKreatury IN (1,2,3);
+
+Zadanie2.
+1.SELECT nazwa FROM kreatura1 WHERE rodzaj!='wiedzma' AND udzwig>=50;
+2.SELECT nazwa FROM zasob1 WHERE waga BETWEEN 2 AND 5;
+3.SELECT nazwa FROM kreatura1 WHERE nazwa LIKE '%or%' AND udzwig BETWEEN 30 AND 70;
+
+Zadanie3.
+1.SELECT nazwa FROM zasob1 WHERE  MONTH(dataPozyskania) IN (7,8);
+2.SELECT nazwa, waga FROM zasob1 WHERE rodzaj is not NULL ORDER BY waga ASC;
+3.SELECT * FROM kreatura1  ORDER BY wiek ASC LIMIT 5;
+
+Zadanie4.
+1.SELECT DISTINCT rodzaj, nazwa FROM zasob1 ; 
+2.SELECT GROUP_CONCAT(nazwa,"-",rodzaj) FROM kreatura1 WHERE rodzaj LIKE 'wi%';
+3.SELECT ilosc*waga AS wagaC FROM zasob1 WHERE year(dataPozyskania) BETWEEN 2000 AND 2007;
+  ALBO 
+  SELECT ilosc*waga AS wagaC FROM zasob1 WHERE dataPozyskania BETWEEN '2000-01-01' AND '2007-12-31';
+
+Zadanie5.
+1.SELECT waga*0.7 AS wagaWlasciwa, waga*0.3 AS odpad FROM zasob1; 
+2. SELECT * FROM zasob1 WHERE rodzaj is  null; 
+3.SELECT DISTINCT rodzaj, nazwa FROM zasob1 WHERE nazwa LIKE 'Ba%' or  nazwa LIKE '%os';
