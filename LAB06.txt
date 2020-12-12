@@ -1,0 +1,30 @@
+Zadanie1.
+1.SELECT avg(waga) FROM kreatura1 WHERE rodzaj='wiking';
+2.SELECT rodzaj , count(*), avg(waga) FROM kreatura1 GROUP BY rodzaj;
+3.SELECT rodzaj , avg(2020-YEAR(dataUr)) FROM kreatura1 GROUP BY rodzaj;
+
+Zadanie2.
+1.SELECT rodzaj, sum(waga) FROM zasob1 GROUP BY  rodzaj;
+2.SELECT nazwa, avg(waga*ilosc) FROM zasob1 WHERE ilosc>=4 GROUP BY nazwa HAVING AVG(waga*ilosc)>10;
+  ALBO
+  SELECT nazwa, avg(waga*ilosc), SUM(ilosc) FROM zasob1  GROUP BY nazwa HAVING AVG(waga*ilosc)>10 AND SUM(ilosc)>=4;
+3.SELECT rodzaj,count(nazwa),SUM(ilosc) FROM zasob1 group by rodzaj having sum(ilosc)>1;
+
+Zadanie3.
+1.SELECT k.nazwa,  k.idKreatury,e.ilosc FROM kreatura1 k join  ekwipunek1  e on k.idKreatury=e.idKreatury;
+2.SELECT k.nazwa,  k.idKreatury, z.nazwa, e.ilosc FROM kreatura k join  ekwipunek  e on k.idKreatury=e.idKreatury JOIN zasob z ON e.idZasobu=z.idZasobu;
+3.SELECT k.idKreatury ,k.nazwa FROM kreatura1 AS k LEFT JOIN ekwipunek1 AS e ON e.idKreatury=k.idKreatury WHERE e.idZasobu is null;
+
+Zadanie4.
+1.SELECT k.nazwa,k.dataUr, z.nazwa FROM kreatura k JOIN ekwipunek e ON k.idKreatury=e.idKreatury JOIN zasob z ON e.idZasobu=z.idZasobu WHERE k.rodzaj='wiking' AND  year(dataUr)>1600 AND year(dataUr)<1700;
+2.SELECT k.nazwa, k.dataUr,e.idZasobu  from kreatura AS k left join ekwipunek AS  e on k.idKreatury=e.idKreatury LEFT JOIN  zasob z  on z.idZasobu=e.idZasobu where e.idZasobu is not null AND  z.rodzaj='jedzenie'  order by dataUr DESC LIMIT 5;
+3.SELECT k.nazwa, t.nazwa from kreatura k join kreatura t on k.idKreatury=(t.idKreatury+5);
+
+Zadanie5.
+1. SELECT k.rodzaj, avg(z.waga*e.ilosc) from kreatura k join ekwipunek e on k.idKreatury=e.idKreatury join zasob z on z.idZasobu=e.idZasobu where k.rodzaj='wiking' or k.rodzaj='wiedzma' or k.rodzaj='ryba' or k.rodzaj='ptak' and e.ilosc<30 group by k.rodzaj;
+2.SELECT k.rodzaj, min(k.dataUr) as min from kreatura k group by k.rodzaj
+    -> union
+    -> select k.rodzaj, max(k.dataUr) from kreatura k group by k.rodzaj;
+
+
+
